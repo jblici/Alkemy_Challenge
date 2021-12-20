@@ -36,7 +36,9 @@ User.hasOne(Wallet)
 User.hasMany(Operation)
 Operation.belongsTo(User)
 Operation.hasOne(Category)
+Operation.belongsTo(Wallet)
 Wallet.belongsTo(User)
+Wallet.hasMany(Operation)
 
 module.exports = {
     ...sequelize.models,

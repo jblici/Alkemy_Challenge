@@ -1,15 +1,24 @@
 const {User} = require('../db');
 
-function getAllUsers(req,res,next) {
-    return User.findAll({
-        attributes: { exclude: ['password']}
-    })
-    .then((users) => res.send(users))
-    .catch((err) => next(err))
+async function getAllUsers(req,res,next) {
+    try {
+        const users = await User.findAll({
+            attributes: { exclude: ['password']}
+        })
+        res.send(users)
+    } catch(err) {
+        res.send(err)
+    }
 }
 
-function getUser (req, res, next) {
-    console.log('user id')
+async function getUser (req, res, next) {
+    try {
+        const {id} = req.params
+        const user = await getUserById(id);
+        res.send(user);
+    } catch (err) {
+        res.send(err)
+    }
 }
 
 module.exports = {getAllUsers, getUser}

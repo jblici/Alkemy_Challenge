@@ -1,13 +1,17 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const routes = require('./routes/index');
+const cors = require('cors');
 
 require('./db');
 const server = express();
 
-server.name = 'API';
+server.use(cors())
+server.use(express.json())
 server.use(bodyParser.urlencoded({ extended: true }))
 server.use(bodyParser.json());
+server.use('/', routes);
+
 server.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Credentials', 'true');
@@ -16,7 +20,7 @@ server.use((req, res, next) => {
     next();
 });
 
-server.use('/', routes);
+
 
 //Error catching
 server.use((err, req, res, next) => {
