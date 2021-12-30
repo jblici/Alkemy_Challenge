@@ -1,8 +1,8 @@
 import React from 'react';
-import {Container, Form} from 'react-bootstrap'
+import {Modal, Button} from 'react-bootstrap'
 import Select from 'react-select';
 
-function NewTransaction(props) {
+function NewTransaction({show, handleClose}) {
 
     const options = [
         { value: 'chocolate', label: 'Chocolate' },
@@ -11,17 +11,20 @@ function NewTransaction(props) {
     ]
 
     return (
-        <Container style={{width: '25%'}}>
-            <Form>
+        <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+                <Modal.Title>New Transaction</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
                 <input className='form-control' type='number' min='0' placeholder='$' />
                 <div className="mb-3 form-check">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Income"/>
-                        <label class="form-check-label" for="inlineCheckbox1">Income</label>
+                    <div className="form-check form-check-inline">
+                        <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value="Income"/>
+                        <label className="form-check-label" htmlFor="inlineCheckbox1">Income</label>
                     </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Expense"/>
-                        <label class="form-check-label" for="inlineCheckbox2">Expense</label>
+                    <div className="form-check form-check-inline">
+                        <input className="form-check-input" type="checkbox" id="inlineCheckbox2" value="Expense"/>
+                        <label className="form-check-label" htmlFor="inlineCheckbox2">Expense</label>
                     </div>
                 </div>
                 <div className='row'>
@@ -38,9 +41,12 @@ function NewTransaction(props) {
                     <label htmlFor="description" className="form-label">Description</label>
                     <textarea rows="2" className="form-control" id="description"/>
                 </div>
-                <button type="submit" className="btn btn-primary">Submit</button>
-            </Form>
-        </Container>
+            </Modal.Body>
+            <Modal.Footer centered='true'>
+                <Button variant="danger" onClick={handleClose}>Cancel</Button>
+                <Button variant="primary" onClick={handleClose}>Add</Button>
+            </Modal.Footer>
+        </Modal>
     );
 }
 

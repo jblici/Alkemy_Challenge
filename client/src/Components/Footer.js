@@ -8,7 +8,7 @@ function Footer() {
         <Box>
             <svg 
             xmlns="http://www.w3.org/2000/svg" 
-            viewBox="0 0 1440 320">
+            viewBox="0 0 1440 300">
                 <path 
                     fill="#ee9ca7" 
                     fillOpacity="1" 
