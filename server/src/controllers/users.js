@@ -12,9 +12,9 @@ async function getAllUsers(req,res,next) {
 }
 
 async function getUser (req, res, next) {
+    const {id} = req.params
     try {
-        const {id} = req.params
-        const user = await getUserById(id);
+        const user = await User.findByPk(id, { exclude: ['password']});
         res.send(user);
     } catch (err) {
         res.send(err)

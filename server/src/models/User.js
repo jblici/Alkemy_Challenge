@@ -10,6 +10,10 @@ module.exports = (sequelize) => {
         autoIncrement: true,
         allowNull: false,
     },
+    balance: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
     email: {
         type: DataTypes.STRING,
         allowNull: false,
