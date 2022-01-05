@@ -14,14 +14,17 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    monto: {
+    amount: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    tipo: {
-        type: DataTypes.ENUM({values: ["ingreso", "egreso"],
+    type: {
+        type: DataTypes.ENUM({values: ["income", "expense"],
         allowNull: false,
         }),
+    },
+    date: {
+      type: DataTypes.DATE,
     }
   });
 };

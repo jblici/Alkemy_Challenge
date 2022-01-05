@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {Link} from 'react-router-dom';
 
 export const Box = styled.div`
 bottom: 0;
@@ -16,3 +17,10 @@ margin-top: 30px;
 margin-left: 50px;
 `;
 
+export const StyledLink = styled(Link)`
+    text-decoration: none;
+
+    &:focus, &:hover, &:visited, &:link, &:active {
+        text-decoration: none;
+    }
+`;

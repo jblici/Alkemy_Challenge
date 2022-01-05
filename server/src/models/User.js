@@ -11,7 +11,7 @@ module.exports = (sequelize) => {
         allowNull: false,
     },
     balance: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.BIGINT,
       defaultValue: 0,
     },
     email: {

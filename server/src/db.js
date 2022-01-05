@@ -35,6 +35,7 @@ const { User, Category, Operation } = sequelize.models;
 User.hasMany(Operation)
 Operation.belongsTo(User)
 Operation.hasOne(Category)
+Category.belongsToMany(Operation, {through: 'CategoryOperation'}) 
 
 module.exports = {
     ...sequelize.models,

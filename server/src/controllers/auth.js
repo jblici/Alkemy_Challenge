@@ -17,7 +17,7 @@ async function signIn(req,res,next) {
         const isPasswordCorrect = await bcrypt.compare(password, existingUser.password);
         if(!isPasswordCorrect) return res.status(401).json({message: "Password is incorrect"});
         const token = jwt.sign({ existingUser }, authConfig.secret, { expiresIn: authConfig.expires });
-        res.status(200).json({ existingUser, token });
+        res.status(200).json({ user: existingUser, token });
     } catch (err) {
         console.log(err)
         res.status(500).json({ message: "Something went wrong" });
@@ -36,7 +36,7 @@ async function signUp(req,res,next) {
         const hashedPassword = await bcrypt.hash(password, 12)
         const newUser = await User.create({ email, password: hashedPassword });
         const token = jwt.sign({ user: newUser }, authConfig.secret, { expiresIn: authConfig.expires });
-        res.status(200).json({ newUser, token });
+        res.status(200).json({ user: newUser, token });
     } catch (err) {
         console.log(err);
         res.status(500).json({ message: "Something went wrong" });

@@ -1,23 +1,25 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import { Route, Switch } from "wouter"
-import { useState } from 'react';
+import { Route, Routes, BrowserRouter as Router } from "react-router-dom"
+import EditTransaction from './Components/EditTransaction';
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
 import Home from './Components/Home';
 import Login from './Components/Login';
+import Landing from './Components/Landing';
 
 function App() {
-  const [transactions, setTransactions] = useState([])
-  const token = window.localStorage.getItem('token');
-
   return (
     <div className="App">
     <Navbar/>
-      <Switch>
-        <Route component={Login} exact path='/login'/>
-        <Route component={Home} exact path='/'/>
-      </Switch>
+      <Router>
+        <Routes>
+          <Route element={<Landing />} exact path='/'/>
+          <Route element={<Login />} exact path='/login'/>
+          <Route element={<EditTransaction />} exact path='/:userId/:id'/>
+          <Route element={<Home />} exact path='/home'/>
+        </Routes>
+      </Router>
       {/* <Transactions transactions={transactions} /> */}
       <Footer />
     </div>
