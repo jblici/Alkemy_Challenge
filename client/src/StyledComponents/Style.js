@@ -19,7 +19,7 @@ margin-left: 50px;
 
 export const StyledLink = styled(Link)`
     text-decoration: none;
-
+    color: black;
     &:focus, &:hover, &:visited, &:link, &:active {
         text-decoration: none;
     }

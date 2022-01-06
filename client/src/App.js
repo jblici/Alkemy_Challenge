@@ -2,6 +2,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom"
 import EditTransaction from './Components/EditTransaction';
+import NewTransaction from './Components/NewTransaction';
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
 import Home from './Components/Home';
@@ -16,11 +17,11 @@ function App() {
         <Routes>
           <Route element={<Landing />} exact path='/'/>
           <Route element={<Login />} exact path='/login'/>
-          <Route element={<EditTransaction />} exact path='/:userId/:id'/>
           <Route element={<Home />} exact path='/home'/>
+          <Route element={<NewTransaction />} exact path='/new/:userId'/>
+          <Route element={<EditTransaction />} exact path='/edit/:userId/:id' />
         </Routes>
       </Router>
-      {/* <Transactions transactions={transactions} /> */}
       <Footer />
     </div>
   );

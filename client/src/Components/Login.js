@@ -29,7 +29,7 @@ function Login() {
             const data = await axios.post('http://localhost:3001/auth/signin', newUser);
             localStorage.setItem('user', JSON.stringify(data.data));
             swal('Welcome!', "Start saving money!", 'success');
-            navigate('/');
+            navigate('/home');
         } catch (err) {
             swal("Error", 'Something went wrong, please try again', 'error');
             console.log(err)
@@ -47,7 +47,7 @@ function Login() {
             const data = await axios.post('http://localhost:3001/auth/signup', newUser);
             localStorage.setItem('user', JSON.stringify(data.data));
             swal('Welcome!', "Start saving money!", 'success');
-            navigate('/');
+            navigate('/home');
         } catch (err) {
             swal("Error", 'Something went wrong, please try again', 'error');
             console.log(err)
