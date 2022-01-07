@@ -8,7 +8,7 @@ const {Operation, User} = require('../db');
 async function getAllOperations(req,res,next) {
     const { userId } = req.params
     try {
-        const operations = await Operation.findAll({
+        let operations = await Operation.findAll({
             where: {userId: userId},
         })
         if(operations.length >= 10) {
@@ -40,7 +40,6 @@ async function getOperation (req, res, next) {
 // Then we add or rest the operation to the balance of the user.
 async function insertOperation(req,res, next) {
     const { description, amount, type, userId, date } = req.body;
-    console.log(req.body)
     try {
         const opCreated = await Operation.create({ description, amount, type, date });
         const user = await User.findByPk(userId);

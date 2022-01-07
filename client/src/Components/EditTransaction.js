@@ -31,22 +31,21 @@ function EditTransaction(props) {
             ...oldOperation,
             [e.target.name]: e.target.value
         })
-        console.log(oldOperation)
     }
 
     const handleCancel = (e) => {
         navigate('/home');
     }
 
+    const handleDelete = async () => {
+        await axios.delete(`http://localhost:3001/operations/${id}`)
+        navigate('/home');
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            if(!oldOperation.description || !oldOperation.amount || !oldOperation.date) {
-                swal("Error", 'Please fill the fields', 'error');
-                return;
-            }
             const operation = {description: oldOperation.description, amount: parseInt(oldOperation.amount), id, userId };
-            console.log(operation)
             await axios.put(`http://localhost:3001/operations/${userId}/${id}`, operation);
             swal('Good job!', "Operation edit success!", 'success');
             navigate('/home');
@@ -82,8 +81,9 @@ function EditTransaction(props) {
                 </div>
                 </Form.Group>
                 <div className='loginbutton'>
-                    <Button variant="danger" onClick={handleCancel}>Cancel</Button>
-                    <Button variant="primary" onClick={handleSubmit}>Submit</Button>
+                    <Button variant="secondary" onClick={handleCancel}>Cancel</Button>
+                    <Button variant="danger" onClick={handleDelete}>Delete</Button>
+                    <Button variant="primary" onClick={handleSubmit}>Edit</Button>
                 </div>
             </Form>
         </Container>

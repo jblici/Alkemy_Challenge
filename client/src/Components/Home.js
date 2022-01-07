@@ -18,12 +18,6 @@ function Home() {
         })
         .catch(error => console.log(error))
     },[localUser.user.id])
-    
-    const handleDelete = (operationId) => {
-        axios.delete(`http://localhost:3001/operations/${operationId}`)
-        setTransactions(transactions.filter(t => t.id !== operationId))
-        navigate('/home');
-    }
 
     if (user) {
         return (
@@ -39,12 +33,12 @@ function Home() {
                             { transactions.filter(t => t.type === 'income').map(t=> (
                                 <div className='detail' key={t.id}>
                                     <div className='date'>{t.date.split('T')[0]}</div>
-                                    <div>{t.description.slice(0,8)} ${t.amount}</div>
+                                    <div className='detailTitle'>{t.description.slice(0,8)}</div>
+                                    <div>${t.amount}</div>
                                     <div className='editdeletebuttons'>
                                         <Link to={`/edit/${t.userId}/${t.id}`}>
-                                            <button className='btn btn-outline-info opButton'>Edit</button>
+                                            <button className='btn btn-outline-info opButton'>Info</button>
                                         </Link>
-                                        <button onClick={(e) => handleDelete(t.id)} className='btn btn-outline-danger opButton'>Delete</button>
                                     </div>
                                 </div>
                             ))}
@@ -57,12 +51,12 @@ function Home() {
                             { transactions.filter(t => t.type === 'expense').map(t=> (
                                 <div className='detail' key={t.id}>
                                     <div className='date'>{t.date.split('T')[0]}</div>
-                                    <div className='amount'>{t.description.slice(0,8)}  ${t.amount}</div>
+                                    <div className='detailTitle'>{t.description.slice(0,8)}  </div>
+                                    <div className='amount'>${t.amount}</div>
                                     <div className='editdeletebuttons'>
                                         <Link to={`/edit/${t.userId}/${t.id}`}>
-                                            <button className='btn btn-outline-info opButton'>Edit</button>
+                                            <button className='btn btn-outline-info opButton'>Info</button>
                                         </Link>
-                                        <button onClick={(e) => handleDelete(t.id)} className='btn btn-outline-danger opButton'>Delete</button>
                                     </div>
                                 </div>
                             ))}

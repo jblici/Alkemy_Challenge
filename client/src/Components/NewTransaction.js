@@ -20,7 +20,6 @@ function NewTransaction(props) {
             ...newOperation,
             [e.target.name]: e.target.value
         })
-        console.log(newOperation)
     }
 
     const handleCancel = (e) => {
@@ -35,7 +34,6 @@ function NewTransaction(props) {
                 return;
             }
             const operation = {description: newOperation.description, amount: newOperation.amount, type: newOperation.type, userId, date: newOperation.date };
-            console.log(operation)
             await axios.post('http://localhost:3001/operations/create', operation);
             swal('Welcome!', "Start saving money!", 'success');
             navigate('/home');
