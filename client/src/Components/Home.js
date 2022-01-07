@@ -5,7 +5,6 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 
 function Home() {
-    const [show, setShow] = useState(false);
     const [user, setUser] = useState({});
     const [transactions, setTransactions] = useState([]);
     const localUser = JSON.parse(localStorage.getItem('user'));
@@ -18,11 +17,11 @@ function Home() {
             setUser(response.data.user)
         })
         .catch(error => console.log(error))
-    },[localUser.user.id, show])
+    },[localUser.user.id])
     
     const handleDelete = (operationId) => {
         axios.delete(`http://localhost:3001/operations/${operationId}`)
-        setShow(false)
+        setTransactions(transactions.filter(t => t.id !== operationId))
         navigate('/home');
     }
 
