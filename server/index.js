@@ -4,6 +4,7 @@ const categories = require('./src/seed/categories');
 const users = require('./src/seed/users');
 
 // Syncing all the models at once.
+// We use BulkCreate to seed user and categories
 conn.sync({ force: true }).then(() => {
   server.listen(3001, async() => {
     console.log('%s listening at 3001'); // eslint-disable-line no-console

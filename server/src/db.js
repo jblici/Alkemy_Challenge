@@ -13,22 +13,22 @@ const basename = path.basename(__filename);
 
 const modelDefiners = []
 
-//Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
+//We read all the archives of the Model folder, we require them and add them to an array modelDefines.
 fs.readdirSync(path.join(__dirname, '/models'))
     .filter((file) => (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js'))
     .forEach((file) => {
         modelDefiners.push(require(path.join(__dirname, '/models', file)));
     });
 
-//Injectamos la conexion (sequelize) a todos los modelos
+//We inject the conection (sequelize) to all the models
 modelDefiners.forEach(model => model(sequelize));
-//Capitalizamos los nombres de los modelos ie: product => Product
+//We capitalize all the names of the models ie: product => Product
 let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-// En sequelize models estan todos los modelos importados como propiedades
-//Para relacionarlos hacemos un destructuring 
+// In sequelize models all the models are imported as properties.
+// For associations we destructure the models.
 
 const { User, Category, Operation } = sequelize.models;
 

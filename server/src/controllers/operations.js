@@ -1,5 +1,10 @@
 const {Operation, User} = require('../db');
 
+
+//In this function we get all the operations from a user taking the user id from the params.
+//We use the where attribute to search for the operations that match the user id.
+//Then we use the splice method to respond to the client the last 10 operations only.
+//The response also includes information about the user because the balance information is super important.
 async function getAllOperations(req,res,next) {
     const { userId } = req.params
     try {
@@ -18,6 +23,7 @@ async function getAllOperations(req,res,next) {
     
 }
 
+// In this function we search for one operation in particular, this helps us for the edition of the operation.
 async function getOperation (req, res, next) {
     const { id } = req.params;
     try {
@@ -29,6 +35,9 @@ async function getOperation (req, res, next) {
     }
 }
 
+// The creation of an operation. We use the information provided to us from the body.
+// We create de operation, after that we associate the operation to the user
+// Then we add or rest the operation to the balance of the user.
 async function insertOperation(req,res, next) {
     const { description, amount, type, userId, date } = req.body;
     console.log(req.body)
@@ -50,6 +59,8 @@ async function insertOperation(req,res, next) {
     }
 }
 
+// At the edit function of the operation we search for an operation in the database
+// After we find it we also look for the user for the modification of the balance.
 async function editOperation(req, res, next) {
     const { id, description, amount, userId } = req.body;
     try {
@@ -79,6 +90,8 @@ async function editOperation(req, res, next) {
     }
 }
 
+// This is the function that helps us delete particular operations
+// After we find the operation we rest or add to the balance of the user
 async function deleteOperation(req, res) {
     const { id } = req.params
     try {

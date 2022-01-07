@@ -1,5 +1,6 @@
 const {Category} = require('../db');
 
+// We use this function to get all categories, using the model Category
 async function getAllCategories(req,res,next) {
     try {
         const categories = await Category.findAll()
@@ -11,6 +12,8 @@ async function getAllCategories(req,res,next) {
     
 }
 
+
+// We use this function to get a category in particular, using the model Category
 async function getCategory (req, res, next) {
     const { id } = req.params;
     try {
